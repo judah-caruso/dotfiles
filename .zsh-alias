@@ -1,0 +1,19 @@
+alias A_EDITOR="nvim"
+
+alias eal="A_EDITOR $HOME/.zsh-alias"
+alias exp="A_EDITOR $HOME/.zsh-export"
+alias erc="A_EDITOR $HOME/.zshrc"
+alias etm="A_EDITOR $HOME/.tmux.conf"
+alias evc="A_EDITOR $HOME/.config/nvim/init.vim"
+alias ecc="A_EDITOR $HOME/.config/nvim/common.vim"
+
+# Instructions
+alias src="source $HOME/.zshrc && echo 'Reloaded \"$HOME/.zshrc\" file successfully!'"
+
+# Overwrites
+alias vim=A_EDITOR
+alias mc="hg"
+alias cd="clear && cd $1"
+fn_new_cd() { cd $1 && ls }
+alias cd="fn_new_cd"
+alias ..="cd .."

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ! [ -x "$(command -v wget)" ]; then
+    echo "wget wasn't found on this system!"
+    exit 1
+fi
+
+if ! [ -x "$(command -v zsh)" ]; then
+    echo "Zsh/Oh My Zsh wasn't found on this system. Downloading..."
+    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+fi
