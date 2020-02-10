@@ -1,11 +1,13 @@
 # Dotfiles
 
-Installs:
-    - zsh/ohmyzsh
-    - tmux
+Installs: 
+
+    - zsh/ohmyzsh  
+    - tmux  
     - neovim
 
-Changes:
+Changes:  
+
     - rebinds escape to caps lock (loadkeys)
 
 ```
