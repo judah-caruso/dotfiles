@@ -2,13 +2,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/h/.oh-my-zsh"
+export ZSH="/home/x/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="flazz"
+# ZSH_THEME="candy"
+ZSH_THEME="cypher"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -73,6 +74,7 @@ plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh-export
 source $HOME/.zsh-alias
+clear && neofetch
 
 # User configuration
 
