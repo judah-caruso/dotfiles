@@ -7,9 +7,6 @@ alias etm="A_EDITOR $HOME/.tmux.conf"
 alias evc="A_EDITOR $HOME/.config/nvim/init.vim"
 alias ecc="A_EDITOR $HOME/.config/nvim/common.vim"
 
-# Instructions
-alias src="source $HOME/.zshrc && echo 'Reloaded \"$HOME/.zshrc\" file successfully!'"
-
 # Overwrites
 alias vim=A_EDITOR
 alias mc="hg"
@@ -17,3 +14,58 @@ alias cd="clear && cd $1"
 fn_new_cd() { cd $1 && ls }
 alias cd="fn_new_cd"
 alias ..="cd .."
+
+# Shortcuts
+alias tmuxls="tmux list-sessions"
+alias tmuxat="tmux attach-session -t"
+alias tmuxks="tmux kill-session -t"
+
+# Functions
+alias scour="fn_scour"
+alias scout="fn_scout"
+
+alias dockerbash="fn_dockershell /bin/bash"
+alias dockersh="fn_dockershell /bin/sh"
+
+alias src="source $HOME/.zshrc && echo 'Reloaded \"$HOME/.zshrc\" file successfully!'"
+
+fn_scour() { # Uses fzy to search for files
+    querystring=""
+
+    if [ -n $1 ]; then
+        querystring="--query=$1"
+    fi
+
+    sedarg="s/.*[.][/]//"
+    file="$(find -type f | fzy -j9 $querystring)"
+
+    if [ -n "$file" ]; then
+        A_EDITOR $file
+    fi
+}
+
+fn_scout() { # Uses ag and fzy to search in files
+    if [[ ! -n $1 ]]; then
+        echo "Usage: scout [search]"
+        return
+    fi
+
+    file="$(ag $1 | fzy -j9)"
+
+    if [ -n "$file" ]; then
+        linenumber=$(echo $file | grep -Po '(?!=[:])\d+')
+        filename=$(echo $file | grep -Po '^.+(?=[:][0-9])')
+        A_EDITOR $filename +$linenumber
+    fi
+}
+
+fn_dockershell() { # Start docker shell
+    entry="/bin/bash"
+    if [[ -n $1 ]]; then
+        entry=$1
+        shift
+    fi
+
+    dir="${PWD##*/}"
+    docker run --rm -it --entrypoint=$entry -v `pwd`:/${dir} -w /${dir} "$@"
+}

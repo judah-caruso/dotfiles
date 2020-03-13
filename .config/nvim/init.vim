@@ -6,6 +6,12 @@ call plug#begin($HOME . '/.config/nvim/plugins')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'rust-lang/rust.vim'
     Plug 'alaviss/nim.nvim'
+    Plug 'mileszs/ack.vim'
+    Plug 'tpope/vim-obsession'
+    Plug 'dhruvasagar/vim-prosession'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'mtth/scratch.vim'
+    Plug 'kongo2002/fsharp-vim'
 call plug#end()
 
 runtime common.vim
