@@ -1,0 +1,11 @@
+Cheat sheet for various system tools
+====================================
+
+Re-generate public key:
+    ssh-keygen -y -f [private key] > [public key]
+
+Write .iso to flash drive:
+    dd bs=2M conv=fdatasync status=progress if=[ISO] of=[FLASH]
+
+List contents of tar archive:
+    tar -tzvf [archive]
