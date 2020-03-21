@@ -33,6 +33,8 @@
 " Syntax
 " ------
 	syntax on
+	colorscheme on
+	set termguicolors
 
 	" JSX
 	autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts,*.js set syntax=javascript

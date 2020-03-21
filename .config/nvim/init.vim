@@ -12,6 +12,7 @@ call plug#begin($HOME . '/.config/nvim/plugins')
     Plug 'terryma/vim-multiple-cursors'
     Plug 'mtth/scratch.vim'
     Plug 'kongo2002/fsharp-vim'
+    Plug 'kyoto-shift/on.vim'
 call plug#end()
 
 runtime common.vim
