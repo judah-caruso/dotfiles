@@ -4,6 +4,7 @@ call plug#begin($HOME . '/.config/nvim/plugins')
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'tpope/vim-commentary'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'kyoto-shift/film-noir'
     Plug 'rust-lang/rust.vim'
     Plug 'alaviss/nim.nvim'
     Plug 'mileszs/ack.vim'

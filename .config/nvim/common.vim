@@ -34,6 +34,11 @@
 " ------
 	syntax on
 
+	" Colorscheme
+	set termguicolors
+	let g:film_noir_color='blue'
+	colorscheme film_noir
+
 	" JSX
 	autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts,*.js set syntax=javascript
 
@@ -117,6 +122,9 @@ set guicursor+=n-i:ver25-iCursor-blinkwait700-blinkon400-blinkoff250
 
 	" Go
 	let g:go_fmt_command="goimports"
+
+	" Rust
+	let g:rustfmt_autosave = 1
 
 	" Ack.vim
 	if executable('ag')
