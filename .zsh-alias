@@ -16,6 +16,7 @@ alias cd="fn_new_cd"
 alias ..="cd .."
 
 # Shortcuts
+alias tmux="/usr/bin/tmux -2"
 alias tmuxls="tmux list-sessions"
 alias tmuxat="tmux attach-session -t"
 alias tmuxks="tmux kill-session -t"
