@@ -1,6 +1,9 @@
 Cheat sheet for various system tools
 ====================================
 
+Generate key:
+    ssh-keygen -t ed25519 -a 100 -f [location]
+
 Re-generate public key:
     ssh-keygen -y -f [private key] > [public key]
 

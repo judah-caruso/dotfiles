@@ -15,7 +15,7 @@
 	set cmdheight=1
 	set showmode
 	set nowrap
-	set noexpandtab " expandtab
+	set expandtab " noexpandtab
 	set autoindent
 	set copyindent
 	set showmatch
@@ -32,15 +32,27 @@
 
 " Syntax
 " ------
-	syntax on
-	colorscheme on
+	set background=dark
 	set termguicolors
+	syntax on
+	let g:hybrid_custom_term_colors = 1
+	colorscheme hybrid
 
 	" JSX
-	autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts,*.js set syntax=javascript
+	    autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts,*.js set syntax=javascript
+
+    " Way-specific
+	    autocmd BufNewFile,BufRead *.way,*.w set syntax=rust
 
 	" Only highlight characters on the 79th column (apposed to: colorcolumn=79)
-		call matchadd('ColorColumn', '\%79v', 100)
+	    call matchadd('ColorColumn', '\%79v', 100)
+
+    " Comment note highlights
+        augroup CustomHighlights
+            autocmd!
+            autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', '\(\([@]\)\?\(TODO\|NOTE\|LEAK\|HACK\|REVISION\|OPTIMIZE\)\)', 10)
+        augroup END
+
 
 	" Small changes
 		highlight ColorColumn	ctermbg=blue		ctermfg=black
@@ -59,8 +71,8 @@
 
 " Cursor
 " ------
-set guicursor=v:block-Cursor
-set guicursor+=n-i:ver25-iCursor-blinkwait700-blinkon400-blinkoff250
+" set guicursor=v:block-Cursor
+" set guicursor+=n-i:ver25-iCursor-blinkwait700-blinkon400-blinkoff250
 
 " Remaps & Custom Commands
 " ------------------------
