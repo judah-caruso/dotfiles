@@ -29,7 +29,7 @@ alias dockerbash="fn_dockershell /bin/bash"
 alias dockersh="fn_dockershell /bin/sh"
 
 alias src="source $HOME/.zshrc && echo 'Reloaded \"$HOME/.zshrc\" file successfully!'"
-alias yadmd="yadm decrypt && chown -c -R root:root ~/.ss*/*"
+alias yadmd="yadm decrypt && chown -c -R root:root ~/.ss*/* && clear && echo 'Decrypted files successfully!'"
 
 fn_scour() { # Uses fzy to search for files
     querystring=""
