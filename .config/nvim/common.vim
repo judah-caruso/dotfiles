@@ -32,20 +32,23 @@
 
 " Syntax
 " ------
-	set background=dark
-	set termguicolors
-	syntax on
-	let g:hybrid_custom_term_colors = 1
-	colorscheme hybrid
+    set background=dark
+    set termguicolors
+    syntax on
+    let g:hybrid_custom_term_colors = 1
+    colorscheme hybrid
 
-	" JSX
-	    autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts,*.js set syntax=javascript
+    " JSX
+        autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts,*.js set syntax=javascript
 
     " Way-specific
-	    autocmd BufNewFile,BufRead *.way,*.w set syntax=rust
+        autocmd BufNewFile,BufRead *.way,*.w set syntax=rust
 
-	" Only highlight characters on the 79th column (apposed to: colorcolumn=79)
-	    call matchadd('ColorColumn', '\%79v', 100)
+    " Odin-specific
+        autocmd BufNewFile,BufRead *.odin set syntax=go
+
+    " Only highlight characters on the 79th column (apposed to: colorcolumn=79)
+        call matchadd('ColorColumn', '\%79v', 100)
 
     " Comment note highlights
         augroup CustomHighlights
