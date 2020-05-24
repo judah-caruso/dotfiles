@@ -14,6 +14,7 @@ call plug#begin($HOME . '/.config/nvim/plugins')
     Plug 'kongo2002/fsharp-vim'
     Plug 'kyoto-shift/on.vim'
     Plug 'w0ng/vim-hybrid'
+    Plug 'Tetralux/odin.vim'
 call plug#end()
 
 runtime common.vim

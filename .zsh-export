@@ -39,3 +39,4 @@ export \
     PATH="$PATH:/usr/local/nim/bin"
     PATH="$PATH:/usr/local/crystal/bin"
     PATH="$PATH:/usr/local/retdec/bin"
+    PATH="$PATH:/usr/local/opt/llvm/bin"
