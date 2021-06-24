@@ -1,0 +1,103 @@
+colorscheme gruvbox
+
+# Global Options
+    set-option global tabstop 4
+    set-option global indentwidth 4
+    set-option global aligntab true
+    set-option global scrolloff 5,0
+    set-option global autoreload yes
+    set-option global writemethod replace
+    # set-option global autoinfo command|onkey|normal # Show all keys
+
+# Keybinds
+	map global normal / '/(?i)'
+
+	map -docstring "Delete until end of line" global normal <c-l> ';Gld<ret>'
+	map -docstring "Delete until end of line" global insert <c-l> '<esc>;Gld<ret>i'
+
+	map -docstring "Move line up"   global normal <a-k> xdkPk
+	map -docstring "Move line down" global normal <a-j> xdpj
+
+	# Sublime-style make cursor for selection
+	map global normal '<c-d>' ': select-or-add-cursor<ret>'
+
+	define-command -override -docstring "Select word under cursor or add cursor to next occurance" \
+	select-or-add-cursor %{ execute-keys -save-regs '' %sh{
+    	if [ $(expr $(echo $kak_selection | wc -m) - 1) -eq 1 ]; then
+    		echo "<a-i>w*"
+    	else
+    		echo "*<s-n>"
+    	fi
+	}}
+
+	# LSP
+	map -docstring "Jump to next error"     global user 'n' ':ne<ret>'
+	map -docstring "Jump to previous error" global user 'p' ':pe<ret>'
+	map -docstring "Jump to current error"  global user 'e' ':ee<ret>'
+
+# Hooks
+	hook global BufCreate .+[.]jai %{ set-option buffer filetype cpp }
+	hook global BufCreate .+[.]8   %{ set-option buffer filetype scheme }
+
+	hook global BufWritePre .* %{ try %{ execute-keys -draft \%s\h+$<ret>d } }
+
+# Highlighters
+	add-highlighter global/ column 79 red,default+fb
+	hook global BufCreate filetree %{ remove-highlighter buffer/* }
+
+	# Custom keyword highlighting (@Todo, @XXX, etc)
+	add-highlighter global/ regex "[@]\b(?i)([a-zA-Z0-9]+)" 0:red+fb
+
+# Plugins
+	source "%val{config}/plugins/plug.kak/rc/plug.kak"
+	plug "andreyorst/plug.kak" noload
+
+	plug "occivink/kakoune-filetree" %{
+    	# set-face global FileTreeDirName default,default
+	}
+
+	plug "andreyorst/smarttab.kak" defer smarttab %{
+    	set-option global softtabstop 4
+	} config %{
+		hook global WinSetOption filetype=(c|cpp|jai) expandtab
+	}
+
+	plug "delapouite/kakoune-buffers" %{
+    	map -docstring "Enter buffers mode" 	 global user b ':enter-buffers-mode<ret>'
+    	map -docstring "Enter lock buffers mode" global user B ':enter-user-mode -lock buffers<ret>'
+	}
+
+	plug "kak-lsp/kak-lsp" do %{
+    	cargo build --release --locked
+    	cargo install --force --path .
+	} config %{
+        set-option global lsp_diagnostic_line_error_sign '║'
+        set-option global lsp_diagnostic_line_warning_sign '┊'
+
+		define-command ne -docstring 'Jump to next error/warning from lsp' %{ lsp-find-error --include-warnings }
+        define-command pe -docstring 'Jump to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
+        define-command ee -docstring 'Jump to current error/warning from lsp' %{ lsp-find-error --include-warnings; lsp-find-error --previous --include-warnings }
+
+        hook global WinSetOption filetype=(rust) %{
+            set window lsp_server_configuration rust.clippy_preference="on"
+        }
+
+        define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
+        hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript) %{
+            set-option window lsp_auto_highlight_references true
+            set-option window lsp_hover_anchor false
+            lsp-auto-hover-enable
+            echo -debug "Enabling LSP for filtetype %opt{filetype}"
+            lsp-enable-window
+        }
+
+        hook global WinSetOption filetype=rust %{
+            hook window BufWritePre .* %{
+                evaluate-commands %sh{
+                    test -f rustfmt.toml && printf lsp-formatting-sync
+                }
+            }
+        }
+
+        hook global KakEnd .* lsp-exit
+	}
