@@ -74,7 +74,6 @@ plugins=(git sudo)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh-export
 source $HOME/.zsh-alias
-clear && neofetch
 
 # User configuration
 

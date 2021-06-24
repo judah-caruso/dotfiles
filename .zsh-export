@@ -1,5 +1,5 @@
 # System-wide editors
-export EDITOR=/usr/bin/nvim
+export EDITOR=/usr/local/bin/kak
 export VISUAL=/usr/bin/nvim
 
 # Better "cypher" prompt
@@ -27,15 +27,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export \
     PATH="$PATH:$HOME/.odin/"
     PATH="$PATH:$HOME/.cargo/bin"
-    PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
-    PATH="$PATH:$HOME/.cabal/bin"
-    PATH="$PATH:$HOME/.ghcup/bin"
     PATH="$PATH:$HOME/.local/bin"
     PATH="$PATH:$HOME/.dotnet/tools"
-    PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
-    PATH="$PATH:$HOME/Devel/utilities"
     PATH="$PATH:$GOPATH/bin"
     PATH="$PATH:/usr/local/go/bin"
-    PATH="$PATH:/usr/local/nim/bin"
-    PATH="$PATH:/usr/local/crystal/bin"
-    PATH="$PATH:/usr/local/retdec/bin"
